@@ -1,19 +1,33 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" class="mx-auto bg-[#0000fe]" />
-  <HelloWorld msg="Hello Vue 3 + Vite" />
+  <main class="min-h-screen">
+    <Header />
+    <Hero />
+    <section>
+      <InputSearch @startSearch="handleSearch" />
+      <ResultList ref="resultListRef"/>
+    </section>
+  </main>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<script>
+import Header from "./components/Header.vue";
+import Hero from "./components/Hero.vue";
+import InputSearch from "./components/InputSearch.vue";
+import ResultList from "./components/result/ResultList.vue";
+
+export default {
+  name: "App",
+  components: {
+    Header,
+    Hero,
+    InputSearch,
+    ResultList,
+  },
+  methods: {
+    handleSearch(keyword) {
+      console.log(`startSearch`);
+      this.$refs.resultListRef.startSearch(keyword);
+    },
+  },
+};
+</script>

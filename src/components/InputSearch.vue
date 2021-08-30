@@ -12,9 +12,9 @@
     </div>
     <div
       id="rekomendasi"
-      class="hidden pl-6 mt-5 ml-6 mr-4 text-gray-600 sm:flex"
+      class="pl-6 mt-5 ml-6 mr-4 text-xs text-gray-600 md:text-base sm:flex"
     >
-      <span class="mr-2">Rekomendasi : </span>
+      <span class="hidden mr-2 md:inline">Rekomendasi : </span>
       <span
         v-for="item in rekomendasi"
         :key="item"

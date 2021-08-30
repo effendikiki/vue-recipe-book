@@ -4,7 +4,7 @@
     <Hero />
     <section>
       <InputSearch @startSearch="handleSearch" />
-      <ResultList ref="resultListRef"/>
+      <ResultList ref="resultListRef" />
     </section>
   </main>
 </template>
@@ -25,7 +25,6 @@ export default {
   },
   methods: {
     handleSearch(keyword) {
-      console.log(`startSearch`);
       this.$refs.resultListRef.startSearch(keyword);
     },
   },

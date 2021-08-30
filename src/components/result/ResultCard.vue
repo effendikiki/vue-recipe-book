@@ -15,21 +15,39 @@
         <p class="mb-3 text-base leading-relaxed line-clamp-3">
           {{ result.strInstructions }}
         </p>
-
         <button
-          id="triggerModal-${this._recipe.idMeal}"
+          @click="toggleModal"
           class="btn hover:bg-primary text-primary-dark"
         >
           Lihat detail
         </button>
       </div>
     </div>
+    <transition name="fade">
+      <Result-Modal
+        v-if="openModal"
+        :result="result"
+        @toggleModal="toggleModal"
+      />
+    </transition>
   </div>
 </template>
 
 <script>
+import ResultModal from "./ResultModal.vue";
 export default {
   props: ["result"],
+  components: { ResultModal },
+  data() {
+    return {
+      openModal: false,
+    };
+  },
+  methods: {
+    toggleModal() {
+      this.openModal = !this.openModal;
+    },
+  },
 };
 </script>
 
@@ -46,6 +64,15 @@ export default {
 }
 
 .card-body-title {
-  @apply mb-4 text-2xl font-semibold tracking-tighter text-black capitalize line-clamp-1 lg:text-3xl;
+  @apply mb-4 text-2xl font-semibold tracking-tighter text-black capitalize line-clamp-1;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

@@ -18,7 +18,7 @@
         />
         <h1>{{ result.strMeal }}</h1>
         <p class="mb-3 text-sm leading-relaxed md:text-base">
-          <b> Bahan :</b> &nbsp;
+          <b> Bahan :</b> <br>
           <span v-for="i in ingredients" :key="i">
             <span v-if="i"> {{ i }}, &nbsp; </span>
           </span>

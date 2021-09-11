@@ -27,23 +27,19 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "InputSearch",
-  data() {
-    return {
-      rekomendasi: ["Rendang", "Steak", "Salad", "Lasagna"],
-      keyword: "",
-    };
-  },
-  methods: {
-    setRecommendation(item) {
-      this.keyword = item;
-    },
-    handleClick() {
-      this.$emit("startSearch", this.keyword);
-    },
-  },
+<script setup>
+import { ref } from "@vue/reactivity";
+
+const rekomendasi = ref(["Rendang", "Steak", "Salad", "Lasagna"]);
+const keyword = ref("");
+
+const setRecommendation = (item) => {
+  keyword.value = item;
+};
+
+const emits = defineEmits(["startSearch"]);
+const handleClick = () => {
+  emits("startSearch", keyword.value);
 };
 </script>
 <style lang="postcss" scoped>

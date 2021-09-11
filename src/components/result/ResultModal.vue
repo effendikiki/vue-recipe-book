@@ -18,13 +18,13 @@
         />
         <h1>{{ result.strMeal }}</h1>
         <p class="mb-3 text-sm leading-relaxed md:text-base">
-          <b> Bahan :</b> <br>
+          <b> Bahan :</b> <br />
           <span v-for="i in ingredients" :key="i">
             <span v-if="i"> {{ i }}, &nbsp; </span>
           </span>
         </p>
         <p class="mb-3 text-sm leading-relaxed md:text-base">
-            <b>Instruksi : </b> <br>
+          <b>Instruksi : </b> <br />
           {{ result.strInstructions }}
         </p>
       </div>
@@ -32,32 +32,27 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "ResultModal",
-  props: ["result"],
-  data() {
-    return {
-      ingredients: [],
-      ingredientsMeasure: [],
-    };
-  },
-  mounted() {
-    //  the data structure of the response we get from this api
-    //  is really bad that i need to do these stupid hacks, i'm sorry :(
+<script setup>
+import { ref } from "@vue/reactivity";
+import { onMounted } from "@vue/runtime-core";
 
-    for (let i = 1; i <= 20; i++) {
-      let getIngredient = "this.result.strIngredient";
-      let getIngredientMeasure = "this.result.strMeasure";
-      getIngredient += i;
-      getIngredientMeasure += i;
-      this.ingredients.push(eval(getIngredient));
-      this.ingredientsMeasure.push(eval(getIngredientMeasure));
-    }
-    // console.log(this.ingredients);
-    // console.log(this.ingredientsMeasure);
-  },
-};
+const props = defineProps({ result: Object });
+
+const ingredients = ref([]);
+const ingredientsMeasure = ref([]);
+
+onMounted(() => {
+  //  the object structure of the response we get from this api
+  //  is really bad that i need to do these stupid hacks, i'm sorry :(
+  for (let i = 1; i <= 20; i++) {
+    let getIngredient = "props.result.strIngredient";
+    let getIngredientMeasure = "props.result.strMeasure";
+    getIngredient += i;
+    getIngredientMeasure += i;
+    ingredients.value.push(eval(getIngredient));
+    ingredientsMeasure.value.push(eval(getIngredientMeasure));
+  }
+});
 </script>
 
 <style lang="postcss" scoped>

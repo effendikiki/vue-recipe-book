@@ -33,21 +33,14 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref } from "@vue/reactivity";
 import ResultModal from "./ResultModal.vue";
-export default {
-  props: ["result"],
-  components: { ResultModal },
-  data() {
-    return {
-      openModal: false,
-    };
-  },
-  methods: {
-    toggleModal() {
-      this.openModal = !this.openModal;
-    },
-  },
+
+const props = defineProps({ result: Object });
+const openModal = ref(false);
+const toggleModal = () => {
+  openModal.value = !openModal.value;
 };
 </script>
 

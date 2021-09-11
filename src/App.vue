@@ -9,24 +9,16 @@
   </main>
 </template>
 
-<script>
+<script setup>
+import { ref } from "@vue/reactivity";
 import Header from "./components/Header.vue";
 import Hero from "./components/Hero.vue";
 import InputSearch from "./components/InputSearch.vue";
 import ResultList from "./components/result/ResultList.vue";
 
-export default {
-  name: "App",
-  components: {
-    Header,
-    Hero,
-    InputSearch,
-    ResultList,
-  },
-  methods: {
-    handleSearch(keyword) {
-      this.$refs.resultListRef.startSearch(keyword);
-    },
-  },
+const resultListRef = ref(null);
+
+const handleSearch = (keyword) => {
+  resultListRef.value.startSearch(keyword);
 };
 </script>

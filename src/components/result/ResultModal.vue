@@ -32,27 +32,29 @@
   </div>
 </template>
 
-<script setup>
-import { ref } from "@vue/reactivity";
-import { onMounted } from "@vue/runtime-core";
-
-const props = defineProps({ result: Object });
-
-const ingredients = ref([]);
-const ingredientsMeasure = ref([]);
-
-onMounted(() => {
-  //  the object structure of the response we get from this api
-  //  is really bad that i need to do these stupid hacks, i'm sorry :(
-  for (let i = 1; i <= 20; i++) {
-    let getIngredient = "props.result.strIngredient";
-    let getIngredientMeasure = "props.result.strMeasure";
-    getIngredient += i;
-    getIngredientMeasure += i;
-    ingredients.value.push(eval(getIngredient));
-    ingredientsMeasure.value.push(eval(getIngredientMeasure));
-  }
-});
+<script>
+export default {
+  name: "ResultModal",
+  props: ["result"],
+  data() {
+    return {
+      ingredients: [],
+      ingredientsMeasure: [],
+    };
+  },
+  mounted() {
+    //  the data structure of the response we get from this api
+    //  is really bad that i need to do these stupid hacks, i'm sorry :(
+    for (let i = 1; i <= 20; i++) {
+      let getIngredient = "this.result.strIngredient";
+      let getIngredientMeasure = "this.result.strMeasure";
+      getIngredient += i;
+      getIngredientMeasure += i;
+      this.ingredients.push(eval(getIngredient));
+      this.ingredientsMeasure.push(eval(getIngredientMeasure));
+    }
+  },
+};
 </script>
 
 <style lang="postcss" scoped>
@@ -62,7 +64,6 @@ onMounted(() => {
 .modal {
   @apply flex lg:max-w-5xl  overflow-hidden bg-white rounded-lg shadow-lg mx-auto h-full;
 }
-
 h1 {
   @apply mb-8 text-2xl font-bold tracking-tighter text-center text-black  lg:text-left lg:text-2xl;
 }

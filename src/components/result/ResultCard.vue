@@ -24,7 +24,7 @@
       </div>
     </div>
     <transition name="fade">
-      <Result-Modal
+      <ResultModal
         v-if="openModal"
         :result="result"
         @toggleModal="toggleModal"
